@@ -3,5 +3,5 @@ import { BlogModel, Blogs } from "./Blog.model";
 export const BlogState:Blogs ={
   bloglist:[],
   errormessage:'',
-  isloaded:false
+  // isloaded:false
 }

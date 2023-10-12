@@ -17,6 +17,4 @@ export const getbloginfo = createSelector(getblogstate, (state) =>{
   return state
 })
 
-export const getspinnerstate = createSelector(getblogstate, (state) =>{
-  return state.isloaded
-})
+

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { MasterService } from "../../master.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { ADD_BLOG, LOAD_BLOG, addblog, addblogsuccess, deleteblog, deleteblogsuccess, loadblog, loadblogfail, loadblogsuccess, loadspinner, updateblog, updateblogsuccess } from "./Blog.actions";
+import { ADD_BLOG, LOAD_BLOG, addblog, addblogsuccess, deleteblog, deleteblogsuccess, loadblog, loadblogfail, loadblogsuccess, updateblog, updateblogsuccess } from "./Blog.actions";
 import { EMPTY, catchError, exhaustMap, map, of, switchMap } from "rxjs";
 import { BlogModel } from "./Blog.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { emptyaction, showalert } from "../Global/App.action";
+import { emptyaction, loadspinner, showalert } from "../Global/App.action";
 
 @Injectable()
 
@@ -36,6 +36,7 @@ export class BlogEffects {
         this.service.CreateBlog(action.bloginput).pipe(
           switchMap(data =>of(
             addblogsuccess({ bloginput: data as BlogModel }),
+            loadspinner({isloaded:false}),
             showalert({message:'Created successfully.', actionresult:'pass'})
           )),
           catchError((_error) => of(showalert({message:'Failed to create blog.', actionresult:'fail'}), loadspinner({isloaded:false})))
@@ -51,6 +52,7 @@ export class BlogEffects {
         this.service.UpdataBlog(action.bloginput).pipe(
           switchMap(res => of(
             updateblogsuccess({ bloginput: action.bloginput }),
+            loadspinner({isloaded:false}),
             showalert({message:'Updated successfully.', actionresult:'pass'})
           )),
           catchError((_error) => of(showalert({message:'Updated Failed - Due to '+ _error.message, actionresult:'fail'}), loadspinner({isloaded:false})))
@@ -66,6 +68,7 @@ export class BlogEffects {
         this.service.DeleteBlog(action.id).pipe(
           switchMap(res => of(
             deleteblogsuccess({ id: action.id }),
+            loadspinner({isloaded:false}),
             showalert({message:'Remove successfully.', actionresult:'pass'})
           )),
           catchError((_error) => of(showalert({message:'Failed to remove.', actionresult:'fail'}), loadspinner({isloaded:false})))

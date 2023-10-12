@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { BlogModel, Blogs } from 'src/app/shared/store/Blog/Blog.model';
 import { getblog, getbloginfo } from 'src/app/shared/store/Blog/Blog.selectors';
 import { AppStateModel } from 'src/app/shared/store/Global/AppState.model';
-import { deleteblog, loadblog, loadspinner } from 'src/app/shared/store/Blog/Blog.actions';
+import { deleteblog, loadblog } from 'src/app/shared/store/Blog/Blog.actions';
+import { loadspinner } from 'src/app/shared/store/Global/App.action';
 
 @Component({
   selector: 'app-blog',

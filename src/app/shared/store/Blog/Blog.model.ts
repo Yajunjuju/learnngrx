@@ -9,5 +9,5 @@ export interface BlogModel{
 export interface Blogs{
   bloglist:BlogModel[],
   errormessage:string,
-  isloaded:boolean
+  // isloaded:boolean
 }
